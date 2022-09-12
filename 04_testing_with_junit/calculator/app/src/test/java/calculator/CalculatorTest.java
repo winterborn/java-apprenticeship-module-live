@@ -9,4 +9,9 @@ public class CalculatorTest {
     Calculator calc = new Calculator();
     assertEquals("2 + 2 should equal 4", Integer.valueOf(4), calc.add(2, 2));
   }
+
+  @Test public void testAddsAB() {
+    Calculator calc = new Calculator();
+    assertEquals(Integer.valueOf(7), calc.add(4, 3));
+  }
 }
