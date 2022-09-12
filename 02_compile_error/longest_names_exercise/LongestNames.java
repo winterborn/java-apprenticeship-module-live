@@ -9,3 +9,5 @@ class LongestName {
       return longest;
     }
   }
+
+//   Does not compile due to longest.length expecting an integer, whilst name expects a string.
