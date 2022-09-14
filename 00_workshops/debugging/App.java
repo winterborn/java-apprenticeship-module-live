@@ -1,7 +1,6 @@
 public class App {
   public static class Fizzbuzz {
     public String play(Integer number) {
-      Integer otherNumber = number - 50;
 
       if (this.isDivisibleBy(15, number)) {
         return "FizzBuzz";
