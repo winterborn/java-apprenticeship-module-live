@@ -1,58 +1,50 @@
 package game;
 
-import java.util.Random;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Game {
 
-    String str = this.getRandomWordFromDictionary();
-    int remainingAttempts = 10;
+    private String str;
+    private ArrayList<Character> guessedLetters = new ArrayList<Character>();
+    private Integer remainingAttempts = 10;
 
-    static final ArrayList<String> DICTIONARY = new ArrayList<>(Arrays.asList("MAKERS", "CANDIES", "DEVELOPER", "LONDON"));
-
-    // // Constructor Method:
-    // Game(String str) {
-    //     this.str = this.getRandomWordFromDictionary();
-    // }
-
-    // str instance variable Getter method:
-    public String getStr() {
-        return this.str;
-    }
-
-    // remainingAttempts instance variable Getter method:
-    public int getRemainingAttempts() {
-        return this.remainingAttempts;
+    // Constructor Method:
+    public Game(WordSelector selector) {
+        str = selector.getRandomWordFromDictionary();
     }
 
     public static void main(String[] args) {
+        /*
         Game game = new Game();
         game.getWordToGuess();
 
-        System.out.println("You have " + game.getRemainingAttempts() + " attempts remaining.");
-        System.out.println(game.getStr());
-    }
-
-    // getRandomWordFromDictionary method:
-    public String getRandomWordFromDictionary() {
-        Random rand = new Random();
-        String result = DICTIONARY.get(rand.nextInt(DICTIONARY.size()));
-        return result;
+        System.out.println("The chosen word is: " + game.getWordToGuess() + "\n"); //prints M______
+        System.out.println("You have " + game.remainingAttempts + " attempts remaining.\n");
+        System.out.println("TEST_CHECK_STR_IS_RANDOM_AND_MATCHES_GETWORDTOGUESS: " + game.str);
+        */
     }
 
     // getWordToGuess method:
     public String getWordToGuess() {
-        StringBuilder sb = new StringBuilder(this.str);  
+        StringBuilder sb = new StringBuilder(str);  
         
-        for (int i = 0; i < this.str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             if (i > 0) {
                 sb.replace(i, i + 1, "_");
             }
         }
 
         String result = sb.toString();  
-        System.out.println(result); //prints M______
         return result;
     }
+
+    public Boolean guessLetter(Character letter) {
+        if (this.str.indexOf(letter) != -1) {
+            guessedLetters.add(letter);
+            return true;
+        } else {
+            remainingAttempts --;
+            return false;
+        }
+    }    
 }

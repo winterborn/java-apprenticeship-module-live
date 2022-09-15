@@ -1,17 +1,54 @@
 package game;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
 public class GameTest {
-  @Test public void testGetsWordToGuess() {
-    Game game = new Game();
-    assertEquals("returns blanked out letters after first letter", "M_____", game.getWordToGuess());
+  @Test public void testGetsWordToGuess1() {
+    WordSelector mockedSelector = mock(WordSelector.class);
+    when(mockedSelector.getRandomWordFromDictionary()).thenReturn("DEVELOPER");
+
+    Game game = new Game(mockedSelector);
+    String str = "D________";
+
+    assertEquals("returns str passed through constructor method", game.getWordToGuess(), str);
   }
 
-  @Test public void testGetsRemainingAttempts() {
-    Game game = new Game();
-    assertEquals("gives a number of 10 remaining attempts available", 10, game.getRemainingAttempts());
+  @Test public void testGetsWordToGuess2() {
+    WordSelector mockedSelector = mock(WordSelector.class);
+    when(mockedSelector.getRandomWordFromDictionary()).thenReturn("DEVELOPER");
+
+    Game game = new Game(mockedSelector);
+
+    assertEquals("returns str passed through constructor method", "D________", game.getWordToGuess());
   }
+
+  @Test public void testGetsWordToGuessWithRandomWord() {
+    WordSelector mockedSelector = mock(WordSelector.class);
+    when(mockedSelector.getRandomWordFromDictionary()).thenReturn("DEVELOPER");
+
+    Game game = new Game(mockedSelector);
+
+    assertEquals("D________", game.getWordToGuess());
+  }
+
+  @Test public void testGuessLetterRightAndDisplayGuessedLetter() {
+    WordSelector mockedSelector = mock(WordSelector.class);
+    when(mockedSelector.getRandomWordFromDictionary()).thenReturn("MAKERS");
+
+    Game game = new Game(mockedSelector);
+
+    assertEquals(game.guessLetter('K'), true);
+  }
+
+  @Test public void testGuessLetterWrong() {
+    WordSelector mockedSelector = mock(WordSelector.class);
+    when(mockedSelector.getRandomWordFromDictionary()).thenReturn("MAKERS");
+
+    Game game = new Game(mockedSelector);
+
+    assertEquals(game.guessLetter('O'), false);
+}
 }
