@@ -6,7 +6,7 @@ public class Game {
 
     private String str;
     private ArrayList<Character> guessedLetters = new ArrayList<Character>();
-    private Integer remainingAttempts = 10;
+    Integer remainingAttempts = 10;
 
     // Constructor Method:
     public Game(WordSelector selector) {
@@ -14,30 +14,37 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        /*
-        Game game = new Game();
+        WordSelector selector = new WordSelector();
+        Game game = new Game(selector);
         game.getWordToGuess();
 
         System.out.println("The chosen word is: " + game.getWordToGuess() + "\n"); //prints M______
         System.out.println("You have " + game.remainingAttempts + " attempts remaining.\n");
         System.out.println("TEST_CHECK_STR_IS_RANDOM_AND_MATCHES_GETWORDTOGUESS: " + game.str);
-        */
     }
 
     // getWordToGuess method:
     public String getWordToGuess() {
-        StringBuilder sb = new StringBuilder(str);  
-        
-        for (int i = 0; i < str.length(); i++) {
-            if (i > 0) {
-                sb.replace(i, i + 1, "_");
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < this.str.length(); i++) {
+            Character currentLetter = str.charAt(i);
+            if (i == 0) {
+                // first letter is always shown
+                sb.append(currentLetter);
+            } else {
+                // show letter only if it was already guessed
+                if (guessedLetters.indexOf(currentLetter) != -1) {
+                    sb.append(currentLetter);
+                } else {
+                    sb.append("_");
+                }
             }
         }
-
-        String result = sb.toString();  
-        return result;
+        return sb.toString();
     }
 
+    // guessLetter method:
     public Boolean guessLetter(Character letter) {
         if (this.str.indexOf(letter) != -1) {
             guessedLetters.add(letter);

@@ -3,12 +3,31 @@
  */
 package game;
 
+import java.util.Scanner;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        WordSelector selector = new WordSelector();
+        Game game = new Game(selector);
+        System.out.println("Welcome! Today the word to guess is:");
+        
+        do {
+            System.out.println(game.getWordToGuess());
+            System.out.println("Enter one letter to guess:");
+            Scanner scanner = new Scanner(System.in);
+            Character guess = scanner.nextLine().charAt(0);
+            Boolean result = game.guessLetter(guess);
+        
+            if (result) {
+                System.out.println("Right!");
+            } else {
+                System.out.println("Wrong...");
+            }
+        } while (game.remainingAttempts >= 1);
+        
     }
 }
