@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private String str;
-    private ArrayList<Character> guessedLetters = new ArrayList<Character>();
+    String str;
+    private static ArrayList<Character> guessedLetters = new ArrayList<Character>();
     Integer remainingAttempts = 10;
 
     // Constructor Method:
@@ -16,8 +16,7 @@ public class Game {
     public static void main(String[] args) {
         WordSelector selector = new WordSelector();
         Game game = new Game(selector);
-        game.getWordToGuess();
-
+    
         System.out.println("The chosen word is: " + game.getWordToGuess() + "\n"); //prints M______
         System.out.println("You have " + game.remainingAttempts + " attempts remaining.\n");
         System.out.println("TEST_CHECK_STR_IS_RANDOM_AND_MATCHES_GETWORDTOGUESS: " + game.str);
@@ -54,4 +53,27 @@ public class Game {
             return false;
         }
     }    
+
+    // isGameLost method:
+    public Boolean isGameLost() {
+        if (remainingAttempts == 0) {
+            System.out.println("You've lost. Try again!");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // isGameWon method:
+    public Boolean isGameWon() {
+        // we start to scan the str at index 1,
+        // as we want to omit the first letter (it's never guessed by the player!)
+        for (int i = 1 ; i < str.length() ; i++) {
+            Character letter = str.charAt(i);
+            if (guessedLetters.indexOf(letter) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -13,21 +13,27 @@ public class App {
     public static void main(String[] args) {
         WordSelector selector = new WordSelector();
         Game game = new Game(selector);
-        System.out.println("Welcome! Today the word to guess is:");
+        System.out.println("Welcome! The word to guess is:");
         
         do {
             System.out.println(game.getWordToGuess());
             System.out.println("Enter one letter to guess:");
             Scanner scanner = new Scanner(System.in);
-            Character guess = scanner.nextLine().charAt(0);
+            Character guess = scanner.nextLine().toUpperCase().charAt(0);
             Boolean result = game.guessLetter(guess);
         
             if (result) {
                 System.out.println("Right!");
+
+                if (game.isGameWon()) {
+                    System.out.println("The word was: " + game.str);
+                    System.out.println("Congratulations! You won!");
+                    break;
+                }
             } else {
                 System.out.println("Wrong...");
+                System.out.println("You have " + game.remainingAttempts + " attempts remaining.");
             }
-        } while (game.remainingAttempts >= 1);
-        
+        } while (!game.isGameLost());
     }
 }

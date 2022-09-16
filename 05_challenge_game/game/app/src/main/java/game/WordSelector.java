@@ -11,7 +11,7 @@ public class WordSelector {
         // System.out.println(ws.getRandomWordFromDictionary());
     }
 
-    public static final ArrayList<String> DICTIONARY = new ArrayList<>(Arrays.asList("MAKERS", "CANDIES", "DEVELOPER", "LONDON"));
+    public static final ArrayList<String> DICTIONARY = new ArrayList<>(Arrays.asList("MAKERS", "CANDIES", "DEVELOPER", "LONDON", "NINTENDO", "SONY", "XBOX", "CLIMBING", "READING", "WRITING", "COOKING", "KNIFE", "CRIME", "SPOON", "SPIDERMAN", "MARVEL", "DINOSAUR"));
 
     public String getRandomWordFromDictionary() {
         Random rand = new Random();
